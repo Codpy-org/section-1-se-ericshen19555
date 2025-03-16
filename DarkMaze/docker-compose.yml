@@ -14,7 +14,7 @@ services:
     image: sonarqube:lts-community
     container_name: sonarqube
     ports:
-      - "9000:9000"
+      - "8088:8088"
     environment:
       - SONAR_JDBC_URL=jdbc:postgresql://db:5432/sonarqube
       - SONAR_JDBC_USERNAME=sonar
@@ -43,7 +43,7 @@ services:
     depends_on:
       - sonarqube
     environment:
-      - SONAR_HOST_URL=http://sonarqube:9000
+      - SONAR_HOST_URL=http://sonarqube:8088
     volumes:
       - ./backend:/usr/src
       - ./reports:/reports
@@ -52,7 +52,7 @@ services:
       -Dsonar.projectKey=DarkMaze
       -Dsonar.sources=/usr/src
       -Dsonar.inclusions=**
-      -Dsonar.host.url=http://sonarqube:9000
+      -Dsonar.host.url=http://sonarqube:8088
       -Dsonar.login=${SONAR_TOKEN}
       -Dsonar.language=py
       -Dsonar.python.version=3
