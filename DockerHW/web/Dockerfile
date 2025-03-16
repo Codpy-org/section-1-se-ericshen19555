@@ -1,17 +1,17 @@
-# Use a lightweight Python image
+# Use the official Python 3.11-slim image as base
 FROM python:3.11-slim
 
-# Set the working directory inside the container
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy the current directory contents into the container
-COPY . .
+# Install Flask
+RUN pip install flask
 
-# Install dependencies (if using Flask or Django, update accordingly)
-RUN pip install --no-cache-dir -r requirements.txt
+# Copy all files from the current directory to /app in the container
+COPY . /app
 
-# Expose the port the application runs on
+# Expose port 5000 to allow communication to/from the container
 EXPOSE 5000
 
-# Define the command to run the application
+# Run the Flask application
 CMD ["python", "main.py"]
